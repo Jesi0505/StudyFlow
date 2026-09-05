@@ -969,6 +969,104 @@ function calculateProductivityScore() {
             "Let's get started. Small steps lead to big results. 🌱";
     }
 }
+/* ==============================
+   WEEKLY STUDY PROGRESS
+============================== */
 
+function updateWeeklyProgress() {
+    const chart = document.getElementById("weekly-chart");
+    const weeklyCompleted = document.getElementById("weekly-completed");
+    const bestDayElement = document.getElementById("best-day");
+
+    if (!chart) return;
+
+    chart.innerHTML = "";
+
+    const today = new Date();
+    const weekData = [];
+
+    for (let i = 6; i >= 0; i--) {
+        const date = new Date(today);
+
+        date.setHours(0, 0, 0, 0);
+        date.setDate(today.getDate() - i);
+
+        const dateString = date.toISOString().split("T")[0];
+
+        const completedCount = tasks.filter(task => {
+            if (!task.completedAt) return false;
+
+            return task.completedAt.startsWith(dateString);
+        }).length;
+
+        weekData.push({
+            date: date,
+            count: completedCount
+        });
+    }
+
+    const totalCompleted = weekData.reduce(
+        (sum, day) => sum + day.count,
+        0
+    );
+
+    weeklyCompleted.textContent = totalCompleted;
+
+    const maxCount = Math.max(
+        ...weekData.map(day => day.count),
+        1
+    );
+
+    let bestDay = "—";
+    let bestCount = 0;
+
+    weekData.forEach(day => {
+        if (day.count > bestCount) {
+            bestCount = day.count;
+
+            bestDay = day.date.toLocaleDateString(
+                "en-US",
+                { weekday: "short" }
+            );
+        }
+    });
+
+    bestDayElement.textContent = bestDay;
+
+    weekData.forEach(day => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "weekly-bar-wrapper";
+
+        const value = document.createElement("span");
+        value.className = "weekly-value";
+        value.textContent = day.count;
+
+        const bar = document.createElement("div");
+        bar.className = "weekly-bar";
+
+        const height =
+            day.count === 0
+                ? 6
+                : (day.count / maxCount) * 160;
+
+        bar.style.height = `${height}px`;
+
+        const dayLabel = document.createElement("span");
+        dayLabel.className = "weekly-day";
+
+        dayLabel.textContent = day.date.toLocaleDateString(
+            "en-US",
+            { weekday: "short" }
+        );
+
+        wrapper.appendChild(value);
+        wrapper.appendChild(bar);
+        wrapper.appendChild(dayLabel);
+
+        chart.appendChild(wrapper);
+    });
+}
+
+updateWeeklyProgress();
 
 calculateProductivityScore();
