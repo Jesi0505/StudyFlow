@@ -202,15 +202,12 @@ taskForm.addEventListener("submit", function(event) {
 
 
     const newTask = {
-
-        id: Date.now(),
-
-        text: text,
-
-        priority: priority,
-
-        completed: false
-    };
+    id: Date.now(),
+    text: text,
+    priority: priority,
+    completed: false,
+    completedAt: null
+};
 
 
     tasks.push(newTask);
