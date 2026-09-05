@@ -295,14 +295,18 @@ taskList.addEventListener("change", function(event) {
 
         if (!task) return;
 
-        task.completed =
-    event.target.checked;
+        task.completed = event.target.checked;
+
+if (task.completed) {
+    task.completedAt = new Date().toISOString();
+} else {
+    task.completedAt = null;
+}
 
 saveTasks();
-
 renderTasks();
-
 calculateProductivityScore();
+updateWeeklyProgress();
     }
 
 });
