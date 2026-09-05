@@ -1,55 +1,66 @@
-/* ================================
-   STUDYFLOW - MAIN STYLES
-================================ */
+/* =====================================================
+   STUDYFLOW — PROFESSIONAL STUDENT DASHBOARD
+===================================================== */
 
 :root {
-    --primary: #6c5ce7;
-    --primary-dark: #5848d6;
-    --secondary: #00b894;
+    --primary: #6d5dfc;
+    --primary-dark: #5748d9;
+    --primary-light: #eeecff;
 
-    --background: #f7f8fc;
+    --success: #12b886;
+    --warning: #f59f00;
+    --danger: #fa5252;
+
+    --background: #f6f7fb;
     --surface: #ffffff;
-    --surface-alt: #f0f1f8;
+    --surface-soft: #f8f9fd;
 
-    --text: #1e2433;
-    --muted: #737b8c;
+    --text: #171a2b;
+    --muted: #7b8194;
 
-    --border: #e5e7ef;
+    --border: #e9eaf1;
 
-    --danger: #e74c3c;
-    --warning: #f39c12;
-    --success: #00a884;
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+
+    --shadow-sm:
+        0 4px 15px rgba(30, 35, 60, 0.05);
 
     --shadow:
-        0 10px 30px rgba(31, 38, 135, 0.08);
+        0 12px 35px rgba(30, 35, 60, 0.08);
 
-    --radius: 18px;
     --transition: 0.25s ease;
 }
 
 
-/* ================================
-   DARK MODE VARIABLES
-================================ */
+/* =====================================================
+   DARK MODE
+===================================================== */
 
 body.dark {
-    --background: #11131a;
-    --surface: #1b1e28;
-    --surface-alt: #151821;
+    --background: #0e1017;
+    --surface: #171a24;
+    --surface-soft: #1d202c;
 
-    --text: #f5f7ff;
-    --muted: #a6adbd;
+    --text: #f5f6fb;
+    --muted: #9ba2b5;
 
-    --border: #2d3240;
+    --border: #292d3a;
+
+    --primary-light: #272342;
+
+    --shadow-sm:
+        0 4px 15px rgba(0, 0, 0, 0.18);
 
     --shadow:
-        0 10px 30px rgba(0, 0, 0, 0.25);
+        0 15px 40px rgba(0, 0, 0, 0.25);
 }
 
 
-/* ================================
+/* =====================================================
    RESET
-================================ */
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -67,6 +78,7 @@ body {
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
+        Roboto,
         sans-serif;
 
     background: var(--background);
@@ -94,19 +106,19 @@ a {
 }
 
 
-/* ================================
+/* =====================================================
    CONTAINER
-================================ */
+===================================================== */
 
 .container {
-    width: min(1120px, 92%);
+    width: min(1160px, 92%);
     margin-inline: auto;
 }
 
 
-/* ================================
+/* =====================================================
    HEADER
-================================ */
+===================================================== */
 
 .header {
     position: sticky;
@@ -115,40 +127,39 @@ a {
     z-index: 100;
 
     background:
-        rgba(255, 255, 255, 0.9);
+        rgba(255, 255, 255, 0.88);
 
     border-bottom:
         1px solid var(--border);
 
-    backdrop-filter: blur(12px);
-
-    transition:
-        background var(--transition);
+    backdrop-filter: blur(18px);
 }
 
 body.dark .header {
     background:
-        rgba(27, 30, 40, 0.92);
+        rgba(23, 26, 36, 0.9);
 }
 
 .nav {
     min-height: 72px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    gap: 20px;
+    gap: 25px;
 }
 
 .logo {
     text-decoration: none;
 
-    font-size: 1.45rem;
+    font-size: 1.5rem;
 
-    font-weight: 800;
+    font-weight: 900;
 
-    color: var(--text);
+    letter-spacing: -0.8px;
 }
 
 .logo span {
@@ -157,7 +168,10 @@ body.dark .header {
 
 nav {
     display: flex;
-    gap: 24px;
+
+    align-items: center;
+
+    gap: 28px;
 }
 
 nav a {
@@ -165,9 +179,9 @@ nav a {
 
     color: var(--muted);
 
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 
-    font-weight: 600;
+    font-weight: 650;
 
     transition:
         color var(--transition);
@@ -183,42 +197,45 @@ nav a:hover {
 
     border: 1px solid var(--border);
 
-    border-radius: 50%;
+    border-radius: 12px;
 
     background: var(--surface);
 
     color: var(--text);
 
-    font-size: 1.1rem;
+    font-size: 1rem;
 
     transition:
         transform var(--transition),
-        background var(--transition);
+        border var(--transition);
 }
 
 .theme-button:hover {
-    transform: rotate(15deg);
+    transform: translateY(-2px);
+
+    border-color: var(--primary);
 }
 
 
-/* ================================
+/* =====================================================
    HERO
-================================ */
+===================================================== */
 
 .hero {
-    min-height: 500px;
+    min-height: 480px;
 
     display: grid;
 
     grid-template-columns:
-        1.4fr 0.8fr;
+        1.5fr 0.8fr;
 
     align-items: center;
 
-    gap: 60px;
+    gap: 80px;
 
-    padding-top: 70px;
-    padding-bottom: 70px;
+    padding-top: 65px;
+
+    padding-bottom: 55px;
 }
 
 .hero-content {
@@ -226,24 +243,26 @@ nav a:hover {
 }
 
 .eyebrow {
-    margin-bottom: 10px;
+    display: inline-block;
+
+    margin-bottom: 12px;
 
     color: var(--primary);
 
-    font-size: 0.78rem;
+    font-size: 0.72rem;
 
-    font-weight: 800;
+    font-weight: 850;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 1.7px;
 }
 
 .hero h1 {
     font-size:
-        clamp(2.6rem, 7vw, 5rem);
+        clamp(2.8rem, 7vw, 5.4rem);
 
-    line-height: 1.03;
+    line-height: 0.98;
 
-    letter-spacing: -2px;
+    letter-spacing: -3px;
 
     margin-bottom: 25px;
 }
@@ -257,32 +276,35 @@ nav a:hover {
 
     color: var(--muted);
 
-    font-size: 1.08rem;
+    font-size: 1.05rem;
 
     margin-bottom: 30px;
 }
 
 
-/* ================================
+/* =====================================================
    BUTTONS
-================================ */
+===================================================== */
 
 .primary-button,
 .secondary-button {
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
-    border: none;
+    min-height: 44px;
 
-    border-radius: 10px;
+    padding: 11px 19px;
 
-    padding: 12px 20px;
+    border-radius: 11px;
 
-    font-weight: 700;
+    font-weight: 750;
 
     text-decoration: none;
+
+    border: none;
 
     transition:
         transform var(--transition),
@@ -296,17 +318,20 @@ nav a:hover {
     color: white;
 
     box-shadow:
-        0 8px 18px rgba(108, 92, 231, 0.25);
+        0 8px 20px rgba(109, 93, 252, 0.25);
 }
 
 .primary-button:hover {
     background: var(--primary-dark);
 
     transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(109, 93, 252, 0.3);
 }
 
 .secondary-button {
-    background: var(--surface-alt);
+    background: var(--surface-soft);
 
     color: var(--text);
 
@@ -322,20 +347,47 @@ nav a:hover {
 }
 
 
-/* ================================
-   HERO PROGRESS CARD
-================================ */
+/* =====================================================
+   HERO DASHBOARD CARD
+===================================================== */
 
 .hero-card {
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: 24px;
-
     padding: 28px;
 
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--surface),
+            var(--surface-soft)
+        );
+
     box-shadow: var(--shadow);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.hero-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(109, 93, 252, 0.1);
+
+    top: -70px;
+    right: -60px;
 }
 
 .hero-card-top {
@@ -343,9 +395,13 @@ nav a:hover {
 
     justify-content: space-between;
 
+    align-items: center;
+
     margin-bottom: 20px;
 
     color: var(--muted);
+
+    font-size: 0.9rem;
 }
 
 .hero-card-top strong {
@@ -357,15 +413,15 @@ nav a:hover {
 .progress-bar {
     width: 100%;
 
-    height: 12px;
+    height: 11px;
+
+    background: var(--surface-soft);
+
+    border-radius: 30px;
 
     overflow: hidden;
 
-    background: var(--surface-alt);
-
-    border-radius: 20px;
-
-    margin-bottom: 15px;
+    margin-bottom: 14px;
 }
 
 #progress-fill {
@@ -377,7 +433,7 @@ nav a:hover {
         linear-gradient(
             90deg,
             var(--primary),
-            #a29bfe
+            #a99cff
         );
 
     border-radius: inherit;
@@ -388,13 +444,13 @@ nav a:hover {
 .hero-card p {
     color: var(--muted);
 
-    font-size: 0.9rem;
+    font-size: 0.84rem;
 }
 
 
-/* ================================
-   STATS
-================================ */
+/* =====================================================
+   STAT CARDS
+===================================================== */
 
 .stats {
     display: grid;
@@ -402,9 +458,9 @@ nav a:hover {
     grid-template-columns:
         repeat(4, 1fr);
 
-    gap: 18px;
+    gap: 16px;
 
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .stat-card {
@@ -412,73 +468,80 @@ nav a:hover {
 
     align-items: center;
 
-    gap: 15px;
+    gap: 14px;
 
-    padding: 22px;
+    padding: 20px;
 
     background: var(--surface);
 
     border:
         1px solid var(--border);
 
-    border-radius: var(--radius);
+    border-radius: var(--radius-md);
 
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-sm);
 
     transition:
-        transform var(--transition);
+        transform var(--transition),
+        box-shadow var(--transition);
 }
 
 .stat-card:hover {
     transform: translateY(-4px);
+
+    box-shadow: var(--shadow);
 }
 
 .stat-icon {
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
 
     display: grid;
 
     place-items: center;
 
+    flex-shrink: 0;
+
     border-radius: 13px;
 
-    background: #f0edff;
+    background: var(--primary-light);
 
-    font-size: 1.35rem;
-}
-
-body.dark .stat-icon {
-    background: #29253e;
+    font-size: 1.2rem;
 }
 
 .stat-card p {
     color: var(--muted);
 
-    font-size: 0.82rem;
+    font-size: 0.78rem;
+
+    margin-bottom: 2px;
 }
 
 .stat-card h2 {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
+
+    letter-spacing: -0.5px;
 }
 
 
-/* ================================
+/* =====================================================
    SECTIONS
-================================ */
+===================================================== */
 
 .section {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 75px;
+
+    padding-bottom: 75px;
 }
 
 .alternate {
-    background: var(--surface-alt);
-
     width: 100%;
 
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 75px;
+
+    padding-bottom: 75px;
+
+    background: var(--surface-soft);
 }
 
 .section-heading {
@@ -490,37 +553,38 @@ body.dark .stat-icon {
 
     gap: 20px;
 
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
 .section-heading h2 {
     font-size: 2rem;
 
-    letter-spacing: -0.7px;
+    letter-spacing: -1px;
 }
 
+
+/* =====================================================
+   BADGE
+===================================================== */
+
 .badge {
-    padding: 7px 13px;
+    padding: 6px 12px;
 
     border-radius: 30px;
 
-    background: #eeeaff;
+    background: var(--primary-light);
 
     color: var(--primary);
 
-    font-size: 0.85rem;
+    font-size: 0.78rem;
 
-    font-weight: 700;
-}
-
-body.dark .badge {
-    background: #29253e;
+    font-weight: 800;
 }
 
 
-/* ================================
+/* =====================================================
    CARDS
-================================ */
+===================================================== */
 
 .card {
     background: var(--surface);
@@ -528,35 +592,35 @@ body.dark .badge {
     border:
         1px solid var(--border);
 
-    border-radius: var(--radius);
+    border-radius: var(--radius-md);
 
-    padding: 28px;
+    padding: 27px;
 
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-sm);
 }
 
 
-/* ================================
-   TASK LAYOUT
-================================ */
+/* =====================================================
+   TASK AREA
+===================================================== */
 
 .task-layout {
     display: grid;
 
     grid-template-columns:
-        1.5fr 0.8fr;
+        1.45fr 0.75fr;
 
-    gap: 25px;
+    gap: 22px;
 }
 
 label {
     display: block;
 
-    margin-bottom: 8px;
+    margin-bottom: 7px;
 
-    font-weight: 700;
+    font-size: 0.83rem;
 
-    font-size: 0.9rem;
+    font-weight: 750;
 }
 
 .input-row {
@@ -565,25 +629,27 @@ label {
     grid-template-columns:
         1fr 120px auto;
 
-    gap: 10px;
+    gap: 9px;
 
-    margin-bottom: 25px;
+    margin-bottom: 22px;
 }
 
 input,
 select {
     width: 100%;
 
-    padding: 12px 14px;
+    min-height: 44px;
+
+    padding: 10px 13px;
+
+    background: var(--surface);
+
+    color: var(--text);
 
     border:
         1px solid var(--border);
 
     border-radius: 10px;
-
-    background: var(--surface);
-
-    color: var(--text);
 
     outline: none;
 
@@ -592,31 +658,35 @@ select {
         box-shadow var(--transition);
 }
 
+input::placeholder {
+    color: var(--muted);
+}
+
 input:focus,
 select:focus {
     border-color: var(--primary);
 
     box-shadow:
         0 0 0 3px
-        rgba(108, 92, 231, 0.12);
+        rgba(109, 93, 252, 0.12);
 }
 
 
-/* ================================
+/* =====================================================
    FILTERS
-================================ */
+===================================================== */
 
 .filters {
     display: flex;
 
-    gap: 8px;
+    gap: 5px;
 
-    margin-bottom: 20px;
+    padding-bottom: 14px;
+
+    margin-bottom: 15px;
 
     border-bottom:
         1px solid var(--border);
-
-    padding-bottom: 15px;
 }
 
 .filter {
@@ -630,7 +700,9 @@ select:focus {
 
     border-radius: 8px;
 
-    font-weight: 600;
+    font-size: 0.82rem;
+
+    font-weight: 700;
 }
 
 .filter:hover {
@@ -638,26 +710,22 @@ select:focus {
 }
 
 .filter.active {
-    background: #eeeaff;
+    background: var(--primary-light);
 
     color: var(--primary);
 }
 
-body.dark .filter.active {
-    background: #29253e;
-}
 
-
-/* ================================
+/* =====================================================
    TASK LIST
-================================ */
+===================================================== */
 
 .task-list {
-    list-style: none;
-
     display: grid;
 
-    gap: 10px;
+    gap: 9px;
+
+    list-style: none;
 }
 
 .task-item {
@@ -665,37 +733,43 @@ body.dark .filter.active {
 
     align-items: center;
 
-    gap: 12px;
+    gap: 11px;
 
-    padding: 14px;
+    padding: 13px;
+
+    background: var(--surface-soft);
 
     border:
         1px solid var(--border);
 
-    border-radius: 12px;
+    border-radius: 11px;
 
-    background: var(--surface-alt);
-
-    animation: slideIn 0.25s ease;
+    animation: taskIn 0.25s ease;
 }
 
 .task-checkbox {
-    width: 19px;
-    height: 19px;
+    width: 18px;
+    height: 18px;
 
     accent-color: var(--primary);
+
+    flex-shrink: 0;
 }
 
 .task-text {
     flex: 1;
 
-    font-weight: 600;
+    font-size: 0.9rem;
+
+    font-weight: 650;
+
+    overflow-wrap: anywhere;
 }
 
 .task-text.completed {
-    text-decoration: line-through;
-
     color: var(--muted);
+
+    text-decoration: line-through;
 }
 
 .task-priority {
@@ -703,19 +777,19 @@ body.dark .filter.active {
 
     border-radius: 6px;
 
-    font-size: 0.72rem;
+    font-size: 0.67rem;
 
-    font-weight: 800;
+    font-weight: 850;
 }
 
 .priority-high {
-    background: #ffe3e0;
+    background: #ffe5e5;
 
     color: var(--danger);
 }
 
 .priority-medium {
-    background: #fff1d6;
+    background: #fff2d8;
 
     color: var(--warning);
 }
@@ -729,7 +803,7 @@ body.dark .filter.active {
 .task-actions {
     display: flex;
 
-    gap: 5px;
+    gap: 3px;
 }
 
 .task-actions button {
@@ -739,55 +813,76 @@ body.dark .filter.active {
 
     padding: 5px;
 
-    font-size: 1rem;
+    border-radius: 7px;
+
+    font-size: 0.9rem;
+
+    transition:
+        background var(--transition);
 }
 
-.edit-task:hover {
+.task-actions button:hover {
+    background: var(--surface);
+
     color: var(--primary);
 }
 
 .delete-task:hover {
-    color: var(--danger);
+    color: var(--danger) !important;
 }
 
 .empty-message {
+    padding: 25px;
+
     text-align: center;
 
     color: var(--muted);
 
-    padding: 25px;
+    font-size: 0.88rem;
 }
 
 
-/* ================================
+/* =====================================================
    TIMER
-================================ */
+===================================================== */
 
 .timer-card {
     text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
 }
 
 .timer-card h2 {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .timer {
-    font-size:
-        clamp(3rem, 8vw, 5rem);
+    margin: 22px 0 5px;
 
-    font-weight: 800;
+    font-size:
+        clamp(3rem, 7vw, 4.8rem);
+
+    line-height: 1;
 
     letter-spacing: -3px;
 
+    font-weight: 850;
+
     color: var(--primary);
 
-    margin: 25px 0 5px;
+    font-variant-numeric: tabular-nums;
 }
 
 .timer-card > p:not(.eyebrow) {
     color: var(--muted);
 
-    margin-bottom: 25px;
+    font-size: 0.85rem;
+
+    margin-bottom: 22px;
 }
 
 .timer-buttons {
@@ -795,13 +890,13 @@ body.dark .filter.active {
 
     justify-content: center;
 
-    gap: 10px;
+    gap: 8px;
 }
 
 
-/* ================================
+/* =====================================================
    CALCULATORS
-================================ */
+===================================================== */
 
 .calculator-grid {
     display: grid;
@@ -809,17 +904,17 @@ body.dark .filter.active {
     grid-template-columns:
         1fr 1fr;
 
-    gap: 25px;
+    gap: 22px;
 }
 
 .card form {
     display: grid;
 
-    gap: 10px;
+    gap: 9px;
 }
 
 .card form input + label {
-    margin-top: 8px;
+    margin-top: 6px;
 }
 
 .result-card {
@@ -837,28 +932,28 @@ body.dark .filter.active {
 
     padding: 40px;
 
-    border-radius: var(--radius);
+    border-radius: var(--radius-md);
 
     background:
         linear-gradient(
             145deg,
             var(--primary),
-            #8e7df5
+            #8d7ffc
         );
 
     color: white;
 
     box-shadow:
-        0 15px 35px
-        rgba(108, 92, 231, 0.25);
+        0 15px 40px
+        rgba(109, 93, 252, 0.22);
 }
 
 .result-card > span {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
 
-    font-weight: 800;
+    font-weight: 850;
 
-    letter-spacing: 1px;
+    letter-spacing: 1.4px;
 
     opacity: 0.85;
 }
@@ -868,11 +963,13 @@ body.dark .filter.active {
 
     line-height: 1;
 
-    margin: 15px 0;
+    margin: 14px 0;
 }
 
 .result-card p {
-    max-width: 350px;
+    max-width: 380px;
+
+    font-size: 0.9rem;
 
     opacity: 0.9;
 }
@@ -880,13 +977,14 @@ body.dark .filter.active {
 .attendance-progress {
     width: 100%;
 
-    max-width: 350px;
+    max-width: 360px;
 
-    height: 10px;
+    height: 9px;
 
-    margin-top: 25px;
+    margin-top: 24px;
 
-    background: rgba(255,255,255,0.25);
+    background:
+        rgba(255, 255, 255, 0.2);
 
     border-radius: 20px;
 
@@ -894,24 +992,26 @@ body.dark .filter.active {
 }
 
 #attendance-fill {
-    height: 100%;
-
     width: 0%;
 
+    height: 100%;
+
     background: white;
+
+    border-radius: inherit;
 
     transition: width 0.5s ease;
 }
 
 
-/* ================================
+/* =====================================================
    DEADLINES
-================================ */
+===================================================== */
 
 .deadline-grid {
     display: grid;
 
-    gap: 14px;
+    gap: 12px;
 }
 
 .deadline-card {
@@ -924,57 +1024,67 @@ body.dark .filter.active {
 
     gap: 15px;
 
-    padding: 20px;
+    padding: 18px;
 
     background: var(--surface);
 
     border:
         1px solid var(--border);
 
-    border-radius: 14px;
+    border-radius: 13px;
 
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-sm);
+
+    transition:
+        transform var(--transition);
+}
+
+.deadline-card:hover {
+    transform: translateX(4px);
 }
 
 .deadline-icon {
-    width: 45px;
-    height: 45px;
+    width: 43px;
+    height: 43px;
 
     display: grid;
 
     place-items: center;
 
-    background: var(--surface-alt);
+    border-radius: 11px;
 
-    border-radius: 10px;
+    background: var(--surface-soft);
 
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .deadline-card h3 {
-    font-size: 1rem;
+    font-size: 0.94rem;
 }
 
 .deadline-card p {
     color: var(--muted);
 
-    font-size: 0.85rem;
+    font-size: 0.78rem;
 }
 
 .deadline-card > strong {
     color: var(--primary);
+
+    font-size: 0.82rem;
 }
 
 
-/* ================================
+/* =====================================================
    FINAL CTA
-================================ */
+===================================================== */
 
 .final-cta {
-    margin-top: 80px;
-    margin-bottom: 80px;
+    margin-top: 70px;
 
-    padding: 50px;
+    margin-bottom: 70px;
+
+    padding: 45px;
 
     display: flex;
 
@@ -984,33 +1094,38 @@ body.dark .filter.active {
 
     gap: 30px;
 
-    border-radius: 24px;
+    border-radius: var(--radius-lg);
 
     background:
         linear-gradient(
             135deg,
-            #eeeaff,
-            #e8f7ff
+            var(--primary-light),
+            #edf7ff
         );
+
+    border:
+        1px solid var(--border);
 }
 
 body.dark .final-cta {
     background:
         linear-gradient(
             135deg,
-            #242037,
-            #192a35
+            #272342,
+            #172631
         );
 }
 
 .final-cta h2 {
     max-width: 650px;
 
+    margin-bottom: 8px;
+
     font-size: 2rem;
 
-    line-height: 1.2;
+    line-height: 1.15;
 
-    margin-bottom: 10px;
+    letter-spacing: -1px;
 }
 
 .final-cta p:last-child {
@@ -1018,38 +1133,39 @@ body.dark .final-cta {
 }
 
 .cta-emoji {
-    font-size: 5rem;
+    font-size: 4.5rem;
 
-    animation: float 3s ease-in-out infinite;
+    animation:
+        float 3s ease-in-out infinite;
 }
 
 
-/* ================================
+/* =====================================================
    FOOTER
-================================ */
+===================================================== */
 
 .footer {
     padding: 35px 20px;
 
     text-align: center;
 
-    background: #151821;
+    background: #11131a;
 
-    color: #aeb4c2;
+    color: #9da3b3;
 
-    font-size: 0.9rem;
+    font-size: 0.82rem;
 }
 
 .footer p + p {
-    margin-top: 5px;
+    margin-top: 4px;
 }
 
 
-/* ================================
+/* =====================================================
    ANIMATIONS
-================================ */
+===================================================== */
 
-@keyframes slideIn {
+@keyframes taskIn {
 
     from {
         opacity: 0;
@@ -1076,14 +1192,14 @@ body.dark .final-cta {
 
     50% {
         transform:
-            translateY(-10px);
+            translateY(-9px);
     }
 }
 
 
-/* ================================
+/* =====================================================
    TABLET
-================================ */
+===================================================== */
 
 @media (max-width: 900px) {
 
@@ -1094,7 +1210,7 @@ body.dark .final-cta {
     }
 
     .hero-card {
-        max-width: 500px;
+        max-width: 550px;
     }
 
     .stats {
@@ -1108,9 +1224,9 @@ body.dark .final-cta {
 }
 
 
-/* ================================
+/* =====================================================
    MOBILE
-================================ */
+===================================================== */
 
 @media (max-width: 600px) {
 
@@ -1130,21 +1246,21 @@ body.dark .final-cta {
 
         justify-content: center;
 
-        gap: 14px;
+        gap: 13px;
     }
 
     nav a {
-        font-size: 0.82rem;
+        font-size: 0.76rem;
     }
 
     .hero {
         padding-top: 50px;
 
-        min-height: auto;
+        padding-bottom: 40px;
     }
 
     .hero h1 {
-        letter-spacing: -1.5px;
+        letter-spacing: -2px;
     }
 
     .stats {
@@ -1159,13 +1275,10 @@ body.dark .final-cta {
         grid-template-columns: 1fr;
     }
 
-    .section {
-        padding-top: 55px;
-        padding-bottom: 55px;
-    }
-
+    .section,
     .alternate {
         padding-top: 55px;
+
         padding-bottom: 55px;
     }
 
@@ -1197,8 +1310,9 @@ body.dark .final-cta {
     }
 
     .final-cta {
-        margin-top: 50px;
-        margin-bottom: 50px;
+        margin-top: 45px;
+
+        margin-bottom: 45px;
 
         padding: 30px;
 
@@ -1213,9 +1327,25 @@ body.dark .final-cta {
 }
 
 
-/* ================================
+/* =====================================================
+   ACCESSIBILITY
+===================================================== */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline:
+        3px solid
+        rgba(109, 93, 252, 0.35);
+
+    outline-offset: 2px;
+}
+
+
+/* =====================================================
    REDUCED MOTION
-================================ */
+===================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -1224,10 +1354,13 @@ body.dark .final-cta {
     *::after {
         scroll-behavior: auto !important;
 
-        animation-duration: 0.01ms !important;
+        animation-duration:
+            0.01ms !important;
 
-        animation-iteration-count: 1 !important;
+        animation-iteration-count:
+            1 !important;
 
-        transition-duration: 0.01ms !important;
+        transition-duration:
+            0.01ms !important;
     }
 }
