@@ -215,13 +215,15 @@ taskForm.addEventListener("submit", function(event) {
 
     tasks.push(newTask);
 
-    saveTasks();
+saveTasks();
 
-    taskInput.value = "";
+taskInput.value = "";
 
-    priorityInput.value = "Medium";
+priorityInput.value = "Medium";
 
-    renderTasks();
+renderTasks();
+
+calculateProductivityScore();
 });
 
 
@@ -235,12 +237,14 @@ taskList.addEventListener("click", function(event) {
 
     if (event.target.classList.contains("delete-task")) {
 
-        tasks =
-            tasks.filter(task => task.id !== id);
+       tasks =
+    tasks.filter(task => task.id !== id);
 
-        saveTasks();
+saveTasks();
 
-        renderTasks();
+renderTasks();
+
+calculateProductivityScore();
     }
 
 
@@ -295,11 +299,13 @@ taskList.addEventListener("change", function(event) {
         if (!task) return;
 
         task.completed =
-            event.target.checked;
+    event.target.checked;
 
-        saveTasks();
+saveTasks();
 
-        renderTasks();
+renderTasks();
+
+calculateProductivityScore();
     }
 
 });
@@ -619,6 +625,7 @@ cgpaForm.addEventListener(
                 cgpa: rounded
             })
         );
+       calculateProductivityScore();
     }
 );
 
