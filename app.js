@@ -757,3 +757,210 @@ resetTimerButton.addEventListener(
 renderTasks();
 
 updateTimerDisplay();
+/* =================================
+   STUDY STREAK
+================================= */
+
+const streakStat =
+    document.getElementById("streak-stat");
+
+
+function updateStudyStreak() {
+
+    const today =
+        new Date().toISOString().split("T")[0];
+
+    const savedDate =
+        localStorage.getItem(
+            "studyflowLastVisit"
+        );
+
+    let streak =
+        Number(
+            localStorage.getItem(
+                "studyflowStreak"
+            )
+        ) || 0;
+
+
+    if (!savedDate) {
+
+        streak = 1;
+
+    } else {
+
+        const previous =
+            new Date(savedDate);
+
+        const current =
+            new Date(today);
+
+        const difference =
+            Math.floor(
+                (current - previous) /
+                (1000 * 60 * 60 * 24)
+            );
+
+
+        if (difference === 1) {
+
+            streak += 1;
+
+        } else if (difference > 1) {
+
+            streak = 1;
+        }
+    }
+
+
+    localStorage.setItem(
+        "studyflowLastVisit",
+        today
+    );
+
+    localStorage.setItem(
+        "studyflowStreak",
+        streak
+    );
+
+
+    if (streakStat) {
+
+        streakStat.textContent =
+            `${streak} ${streak === 1 ? "day" : "days"}`;
+    }
+}
+
+
+updateStudyStreak();
+
+
+
+/* =================================
+   PRODUCTIVITY SCORE
+================================= */
+
+const productivityScore =
+    document.getElementById(
+        "productivity-score"
+    );
+
+const productivityMessage =
+    document.getElementById(
+        "productivity-message"
+    );
+
+
+function calculateProductivityScore() {
+
+    if (!productivityScore) {
+        return;
+    }
+
+
+    let score = 0;
+
+
+    /* TASK SCORE */
+
+    if (tasks.length > 0) {
+
+        const completed =
+            tasks.filter(
+                task => task.completed
+            ).length;
+
+
+        const taskPercentage =
+            completed / tasks.length;
+
+
+        score +=
+            taskPercentage * 40;
+    }
+
+
+    /* ATTENDANCE SCORE */
+
+    const attendanceData =
+        JSON.parse(
+            localStorage.getItem(
+                "studyflowAttendance"
+            )
+        );
+
+
+    if (attendanceData) {
+
+        const attendance =
+            Number(
+                attendanceData.percentage
+            );
+
+
+        score +=
+            Math.min(
+                attendance / 100,
+                1
+            ) * 30;
+    }
+
+
+    /* CGPA SCORE */
+
+    const cgpaData =
+        JSON.parse(
+            localStorage.getItem(
+                "studyflowCGPA"
+            )
+        );
+
+
+    if (cgpaData) {
+
+        const cgpa =
+            Number(
+                cgpaData.cgpa
+            );
+
+
+        score +=
+            Math.min(
+                cgpa / 10,
+                1
+            ) * 30;
+    }
+
+
+    score =
+        Math.round(score);
+
+
+    productivityScore.textContent =
+        score;
+
+
+    if (score >= 90) {
+
+        productivityMessage.textContent =
+            "Outstanding! You're absolutely crushing your goals. 🏆";
+
+    } else if (score >= 75) {
+
+        productivityMessage.textContent =
+            "Excellent progress! Keep the momentum going. 🚀";
+
+    } else if (score >= 50) {
+
+        productivityMessage.textContent =
+            "Good start! A little consistency can take you further. 📈";
+
+    } else {
+
+        productivityMessage.textContent =
+            "Let's get started. Small steps lead to big results. 🌱";
+    }
+}
+
+
+calculateProductivityScore();
