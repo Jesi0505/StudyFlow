@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="StudyFlow - A smart productivity dashboard for students">
+
+    <title>StudyFlow | Student Productivity Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container nav">
+
+        <a href="#" class="logo">
+            Study<span>Flow</span>
+        </a>
+
+        <nav aria-label="Main navigation">
+            <a href="#dashboard">Dashboard</a>
+            <a href="#tasks">Tasks</a>
+            <a href="#attendance">Attendance</a>
+            <a href="#cgpa">CGPA</a>
+        </nav>
+
+        <button id="theme-toggle"
+                class="theme-button"
+                aria-label="Toggle dark mode">
+            🌙
+        </button>
+
+    </div>
+</header>
+
+
+<main id="dashboard">
+
+    <!-- HERO -->
+    <section class="hero container">
+
+        <div class="hero-content">
+
+            <p class="eyebrow">STUDENT PRODUCTIVITY HUB</p>
+
+            <h1>
+                Study smarter.<br>
+                <span>Achieve more.</span>
+            </h1>
+
+            <p class="hero-text">
+                Manage your tasks, track attendance, calculate
+                your CGPA and stay focused — all in one place.
+            </p>
+
+            <a href="#tasks" class="primary-button">
+                Start Planning →
+            </a>
+
+        </div>
+
+        <div class="hero-card">
+
+            <div class="hero-card-top">
+                <span>Today's Progress</span>
+                <strong id="progress-percent">0%</strong>
+            </div>
+
+            <div class="progress-bar">
+                <div id="progress-fill"></div>
+            </div>
+
+            <p>
+                <span id="completed-count">0</span>
+                of
+                <span id="total-count">0</span>
+                tasks completed
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATS -->
+    <section class="stats container">
+
+        <article class="stat-card">
+            <div class="stat-icon">📚</div>
+            <div>
+                <p>Attendance</p>
+                <h2 id="attendance-stat">--%</h2>
+            </div>
+        </article>
+
+        <article class="stat-card">
+            <div class="stat-icon">🎓</div>
+            <div>
+                <p>CGPA</p>
+                <h2 id="cgpa-stat">--</h2>
+            </div>
+        </article>
+
+        <article class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div>
+                <p>Tasks</p>
+                <h2 id="task-stat">0</h2>
+            </div>
+        </article>
+
+        <article class="stat-card">
+            <div class="stat-icon">⏱️</div>
+            <div>
+                <p>Focus</p>
+                <h2 id="timer-stat">25:00</h2>
+            </div>
+        </article>
+
+    </section>
+
+
+    <!-- TASKS -->
+    <section id="tasks" class="section container">
+
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">PLAN YOUR DAY</p>
+                <h2>My Tasks</h2>
+            </div>
+
+            <span id="task-count" class="badge">
+                0 tasks
+            </span>
+        </div>
+
+
+        <div class="task-layout">
+
+            <div class="card">
+
+                <form id="task-form">
+
+                    <label for="task-input">
+                        Add a new task
+                    </label>
+
+                    <div class="input-row">
+
+                        <input
+                            type="text"
+                            id="task-input"
+                            placeholder="e.g. Complete DBMS assignment"
+                            required
+                        >
+
+                        <select id="priority-input"
+                                aria-label="Task priority">
+
+                            <option value="Low">Low</option>
+                            <option value="Medium" selected>
+                                Medium
+                            </option>
+                            <option value="High">High</option>
+
+                        </select>
+
+                        <button type="submit"
+                                class="primary-button">
+                            Add
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <div class="filters"
+                     role="group"
+                     aria-label="Task filters">
+
+                    <button class="filter active"
+                            data-filter="all">
+                        All
+                    </button>
+
+                    <button class="filter"
+                            data-filter="active">
+                        Active
+                    </button>
+
+                    <button class="filter"
+                            data-filter="completed">
+                        Completed
+                    </button>
+
+                </div>
+
+                <ul id="task-list"
+                    class="task-list">
+                </ul>
+
+                <p id="empty-tasks"
+                   class="empty-message">
+                    No tasks yet. Add your first task! 🎯
+                </p>
+
+            </div>
+
+
+            <!-- FOCUS TIMER -->
+            <div class="card timer-card">
+
+                <p class="eyebrow">FOCUS SESSION</p>
+
+                <h2>Pomodoro Timer</h2>
+
+                <div id="timer"
+                     class="timer">
+                    25:00
+                </div>
+
+                <p id="timer-mode">
+                    Focus time
+                </p>
+
+                <div class="timer-buttons">
+
+                    <button id="start-timer"
+                            class="primary-button">
+                        ▶ Start
+                    </button>
+
+                    <button id="reset-timer"
+                            class="secondary-button">
+                        ↻ Reset
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ATTENDANCE -->
+    <section id="attendance"
+             class="section alternate">
+
+        <div class="container">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">
+                        NEVER MISS THE TARGET
+                    </p>
+
+                    <h2>Attendance Calculator</h2>
+                </div>
+            </div>
+
+
+            <div class="calculator-grid">
+
+                <div class="card">
+
+                    <form id="attendance-form">
+
+                        <label for="total-classes">
+                            Total Classes
+                        </label>
+
+                        <input
+                            type="number"
+                            id="total-classes"
+                            min="1"
+                            placeholder="e.g. 50"
+                            required
+                        >
+
+
+                        <label for="attended-classes">
+                            Classes Attended
+                        </label>
+
+                        <input
+                            type="number"
+                            id="attended-classes"
+                            min="0"
+                            placeholder="e.g. 42"
+                            required
+                        >
+
+
+                        <button type="submit"
+                                class="primary-button full">
+                            Calculate Attendance
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <span>YOUR ATTENDANCE</span>
+
+                    <strong id="attendance-result">
+                        --%
+                    </strong>
+
+                    <p id="attendance-message">
+                        Enter your class details to calculate.
+                    </p>
+
+                    <div class="attendance-progress">
+                        <div id="attendance-fill"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CGPA -->
+    <section id="cgpa"
+             class="section container">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="eyebrow">
+                    TRACK YOUR PERFORMANCE
+                </p>
+
+                <h2>CGPA Calculator</h2>
+            </div>
+
+        </div>
+
+
+        <div class="calculator-grid">
+
+            <div class="card">
+
+                <form id="cgpa-form">
+
+                    <label for="sem1">
+                        Semester 1 GPA
+                    </label>
+
+                    <input
+                        type="number"
+                        id="sem1"
+                        min="0"
+                        max="10"
+                        step="0.01"
+                        placeholder="e.g. 8.2"
+                        required
+                    >
+
+
+                    <label for="sem2">
+                        Semester 2 GPA
+                    </label>
+
+                    <input
+                        type="number"
+                        id="sem2"
+                        min="0"
+                        max="10"
+                        step="0.01"
+                        placeholder="e.g. 8.5"
+                        required
+                    >
+
+
+                    <label for="sem3">
+                        Semester 3 GPA
+                    </label>
+
+                    <input
+                        type="number"
+                        id="sem3"
+                        min="0"
+                        max="10"
+                        step="0.01"
+                        placeholder="e.g. 8.7"
+                        required
+                    >
+
+
+                    <label for="sem4">
+                        Semester 4 GPA
+                    </label>
+
+                    <input
+                        type="number"
+                        id="sem4"
+                        min="0"
+                        max="10"
+                        step="0.01"
+                        placeholder="e.g. 9.0"
+                        required
+                    >
+
+
+                    <button type="submit"
+                            class="primary-button full">
+                        Calculate CGPA
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <div class="result-card cgpa-result">
+
+                <span>YOUR CGPA</span>
+
+                <strong id="cgpa-result">
+                    --
+                </strong>
+
+                <p id="cgpa-message">
+                    Enter your semester GPAs.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DEADLINES -->
+    <section class="section alternate">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="eyebrow">
+                        STAY AHEAD
+                    </p>
+
+                    <h2>Upcoming Deadlines</h2>
+                </div>
+
+            </div>
+
+
+            <div class="deadline-grid">
+
+                <article class="deadline-card">
+
+                    <span class="deadline-icon">
+                        📘
+                    </span>
+
+                    <div>
+                        <h3>DBMS Assignment</h3>
+                        <p>Database Management Systems</p>
+                    </div>
+
+                    <strong>Sep 10</strong>
+
+                </article>
+
+
+                <article class="deadline-card">
+
+                    <span class="deadline-icon">
+                        💻
+                    </span>
+
+                    <div>
+                        <h3>Mini Project Review</h3>
+                        <p>Project Presentation</p>
+                    </div>
+
+                    <strong>Sep 15</strong>
+
+                </article>
+
+
+                <article class="deadline-card">
+
+                    <span class="deadline-icon">
+                        📝
+                    </span>
+
+                    <div>
+                        <h3>Internal Assessment</h3>
+                        <p>Computer Science</p>
+                    </div>
+
+                    <strong>Sep 20</strong>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FINAL CTA -->
+    <section class="final-cta container">
+
+        <div>
+
+            <p class="eyebrow">
+                YOUR ACADEMIC JOURNEY
+            </p>
+
+            <h2>
+                Small progress every day
+                creates big results.
+            </h2>
+
+            <p>
+                Plan it. Track it. Achieve it.
+            </p>
+
+        </div>
+
+        <span class="cta-emoji">🚀</span>
+
+    </section>
+
+</main>
+
+
+<footer class="footer">
+
+    <p>
+        Built with ❤️ by Jesima Yohaana
+    </p>
+
+    <p>
+        StudyFlow © 2026
+    </p>
+
+</footer>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
